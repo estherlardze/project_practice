@@ -1,13 +1,10 @@
-import {createClient} from '@supabase/supabase-js';
+import { createBrowserClient } from "@supabase/ssr";
 
+const superbaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-const superbaseURL=process.env.NEXT_PUBLIC_API_URL 
-
-const supabaseKEY = process.env.NEXT_PUBLIC_API_KEY;
-
-if(!supabaseKEY || !superbaseURL){
-    throw new Error('Missing Supabase credentials')
+if (!supabaseKEY || !superbaseURL) {
+    throw new Error("Missing Supabase credentials");
 }
 
-
-export const supabase = createClient(supabaseKEY, superbaseURL);
+export const supabaseClient = createBrowserClient(superbaseURL, supabaseKEY);
