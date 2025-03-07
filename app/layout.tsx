@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 storyblokInit({
-    accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
+    accessToken: "n46UbHve8nUoK97LxBMQ0gtt",
     use: [apiPlugin],
 });
 
