@@ -1,11 +1,27 @@
 "use client";
+import { deleteTodo } from "@/util/todo";
 import React from "react";
+import ToggleTodoState from "./ToggleTodoState";
 
-const TodoItem = ({ title }: { title: string }) => {
+const TodoItem = ({
+    title,
+    id,
+    completed,
+}: {
+    title: string;
+    id: string;
+    completed: boolean;
+}) => {
     return (
-        <div>
+        <div className="space-x-2">
             <span>{title}</span>
-            <button onClick={}>Delete</button>
+            <button
+                className="bg-red-500 text-white px-2 py-0.5"
+                onClick={() => deleteTodo(id)}
+            >
+                D
+            </button>
+            <ToggleTodoState id={id} completed={completed} />
         </div>
     );
 };

@@ -22,8 +22,13 @@ const NewTodo = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="title" placeholder="New Todo" />
+        <form onSubmit={handleSubmit} className="grid">
+            <input
+                type="text"
+                name="title"
+                className="border"
+                placeholder="New Todo"
+            />
             <button type="submit">Add</button>
         </form>
     );

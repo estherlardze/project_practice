@@ -1,5 +1,6 @@
 import { createClient } from "@/util/supabase/server";
 import { cookies } from "next/headers";
+import TodoItem from "./TodoItem";
 
 export default async function Page() {
     const cookieStore = await cookies();
@@ -8,9 +9,15 @@ export default async function Page() {
     const { data: todos } = await supabase.from("TodoList").select();
 
     return (
-        <ul>
+        <ul className="space-y-2">
             {todos?.map((todo) => (
-                <li key={todo.id}>{todo.title}</li>
+                <li className="list-none" key={todo.id}>
+                    <TodoItem
+                        title={todo.title}
+                        id={todo.id}
+                        completed={todo.completed}
+                    />
+                </li>
             ))}
         </ul>
     );

@@ -20,3 +20,17 @@ export async function deleteTodo(id: string) {
 
     await refreshData();
 }
+
+export async function toggleTodo(id: string, completed: boolean) {
+    const { error } = await createClient()
+        .from("TodoList")
+        .update({ completed })
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    await refreshData();
+}
