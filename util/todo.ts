@@ -1,17 +1,18 @@
 "use server";
-
 import { revalidatePath } from "next/cache";
-import { createClient } from "./supabase/client";
+import { createClient } from "./supabase/server";
+import { cookies } from "next/headers";
 
 export async function refreshData() {
     revalidatePath("/");
 }
 
 export async function deleteTodo(id: string) {
-    const { error } = await createClient()
+    const cookieStore = cookies();
+    const { error } = await createClient(cookieStore)
         .from("TodoList")
         .delete()
-        .eq("id", id);
+        .eq("id", parseInt(id));
 
     if (error) {
         console.error(error);
@@ -22,10 +23,11 @@ export async function deleteTodo(id: string) {
 }
 
 export async function toggleTodo(id: string, completed: boolean) {
-    const { error } = await createClient()
+    const cookieStore = cookies();
+    const { error } = await createClient(cookieStore)
         .from("TodoList")
         .update({ completed })
-        .eq("id", id);
+        .eq("id", parseInt(id));
 
     if (error) {
         console.error(error);
